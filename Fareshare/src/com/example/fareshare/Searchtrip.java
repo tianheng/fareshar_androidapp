@@ -45,7 +45,7 @@ public class Searchtrip extends Activity {
         try{
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://127.0.0.1/food.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+           // httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
