@@ -42,6 +42,7 @@ public class Searchtrip extends Activity {
 	 private String destination;
 	 private String radius;
 	 private String PosterID_whole;
+	 private List<Map<String, String>> PosterIDList = new ArrayList<Map<String, String>>();
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
@@ -50,12 +51,12 @@ public class Searchtrip extends Activity {
 	  destination = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_DESTINATION);
 	  radius = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_RADIUS);
 	  setContentView(R.layout.activity_main);
-	  listView = (ListView) findViewById(R.id.listView1);
+	  //listView = (ListView) findViewById(R.id.listView1);
 	  accessWebService();
-	  //TextView textView=new TextView(this);
-	  //textView.setTextSize(40);
-	  //textView.setText(PosterID_whole);
-	 // setContentView(textView);
+	  SimpleAdapter simpleAdapter = new SimpleAdapter(this, PosterIDList,
+			    android.R.layout.simple_list_item_1,
+			    new String[] { "PosterID" }, new int[] { android.R.id.text1 });
+	  //listView.setAdapter(simpleAdapter);
 	 }
 	 
 	 @Override
@@ -119,12 +120,12 @@ public class Searchtrip extends Activity {
 	 
 	 // build hash set for list view
 	 public void ListDrwaer() {
-	  List<Map<String, String>> PosterIDList = new ArrayList<Map<String, String>>();
+	  
 	 
 	  try {
 		  JSONArray jArray = new JSONArray(jsonResult);
 	        JSONObject json_data=null;
-	        String PosterID;
+	        String PosterID="";
 	        String TripID;
 	        String DriverID;
 	        String fd_name;
@@ -132,21 +133,21 @@ public class Searchtrip extends Activity {
 	        PosterID_whole=json_data.getString("PosterID");
 	        for(int i=0;i<jArray.length();i++){
 	                json_data = jArray.getJSONObject(i);
-	                PosterID=json_data.getString("PosterID");
+	                PosterID+=json_data.getString("TripID")+"\n";
 	                TripID=json_data.getString("TripID");
 	                DriverID=json_data.getString("DriverID");
 	                PosterIDList.add(createPoster("PosterID", PosterID));
 	        }	         
+	  		PosterID_whole=PosterID;
+	  	  TextView textView=new TextView(this);
+		  textView.setTextSize(40);
+		  textView.setText(PosterID_whole);
+		  setContentView(textView);
 	        }catch(JSONException e1){
 				Toast.makeText(getBaseContext(), "No PosterID", Toast.LENGTH_LONG).show();
 	        }catch (ParseException e1){
 	            e1.printStackTrace();
 	        }
-	 
-	  SimpleAdapter simpleAdapter = new SimpleAdapter(this, PosterIDList,
-	    android.R.layout.simple_list_item_1,
-	    new String[] { "PosterID" }, new int[] { android.R.id.text1 });
-	  listView.setAdapter(simpleAdapter);
 	 }
 	 
 	 private HashMap<String, String> createPoster(String name, String number) {
