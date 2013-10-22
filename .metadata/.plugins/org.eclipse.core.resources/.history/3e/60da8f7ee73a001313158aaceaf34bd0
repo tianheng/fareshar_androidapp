@@ -121,13 +121,12 @@ public class Searchtrip extends Activity {
 	        String DriverID="";
 	        if (success==1)
 	        {
-	        JSONArray array= new JSONArray(jsonobject.getString("output"));
-	        JSONObject array_obj=array.getJSONObject(0);
-	        String output_str=array_obj.toString();
-	        JSONArray jArray = new JSONArray(output_str);
+	        String output_str=jsonobject.getString("output");
+	        JSONArray jArray= new JSONArray(output_str);
+	        JSONObject json_data=null;
 	        for(int i=0;i<jArray.length();i++){
 	        		HashMap<String,String> item = new HashMap<String, String>();
-	                JSONObject json_data = jArray.getJSONObject(i);
+	                json_data = jArray.getJSONObject(i);
 	                PosterID+=json_data.getString("PosterID");
 	                TripID=json_data.getString("TripID");
 	                DriverID=json_data.getString("DriverID");
