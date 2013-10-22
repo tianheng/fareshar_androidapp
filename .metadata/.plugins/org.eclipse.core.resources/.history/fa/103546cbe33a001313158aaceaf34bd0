@@ -32,7 +32,7 @@ import android.widget.Toast;
 public class Searchtrip extends Activity {
 	 @SuppressLint("NewApi")
 	 private String jsonResult;
-	 private String url = "http://ec2-54-214-246-100.us-west-2.compute.amazonaws.com/index.php/trip/search?";
+	 private String url = "http://ec2-54-214-246-100.us-west-2.compute.amazonaws.com/Controllers/TripController.php?";
 	 private ListView listView;
 	 private String origin;
 	 private String destination;
@@ -48,6 +48,7 @@ public class Searchtrip extends Activity {
 	  radius = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_RADIUS);
 	  setContentView(R.layout.activity_main);
 	  accessWebService();
+	  //listView.setAdapter(simpleAdapter);
 	 }
 	 
 	 @Override
@@ -62,7 +63,7 @@ public class Searchtrip extends Activity {
 	  @Override
 	  protected String doInBackground(String... params) {
 	   HttpClient httpclient = new DefaultHttpClient();
-	   params[0]+="origin="+origin+"&destination="+destination;
+	   params[0]+="Origin=champaign&Destination=chicago";
 	   HttpGet httpget = new HttpGet(params[0]);
 	   try {
 	    HttpResponse response = httpclient.execute(httpget);
@@ -112,27 +113,22 @@ public class Searchtrip extends Activity {
 	 // build hash set for list view
 	 public void ListDrwaer() {	  
 	  try {
-		    JSONObject jsonobject=new JSONObject(jsonResult);
-	        String status_str=jsonobject.getString("status");
-		  	JSONObject status=new JSONObject(status_str);
-	        int success = status.getInt("success");
-	        String PosterID="";
-	        String TripID="";
-	        String DriverID="";
-	        if (success==1)
-	        {
-	        String output_str=jsonobject.getString("output");
-	        JSONArray jArray= new JSONArray(output_str);
+		  JSONArray jArray = new JSONArray(jsonResult);
 	        JSONObject json_data=null;
+	        String PosterID="";
+	        String TripID;
+	        String DriverID;
+	        String fd_name;
+	        json_data = jArray.getJSONObject(0);
 	        for(int i=0;i<jArray.length();i++){
 	        		HashMap<String,String> item = new HashMap<String, String>();
 	                json_data = jArray.getJSONObject(i);
-	                PosterID+=json_data.getString("PosterID");
-	                TripID=json_data.getString("TripID");
-	                DriverID=json_data.getString("DriverID");
-	                //PosterID="fuck you";
-	                //TripID="fuck you too";
-	                //DriverID="yeah";
+	                //PosterID+=json_data.getString("TripID");
+	                //TripID=json_data.getString("TripID");
+	                //DriverID=json_data.getString("DriverID");
+	                PosterID="fuck you";
+	                TripID="fuck you too";
+	                DriverID="yeah";
 	                item.put("PosterID", PosterID);
 	                item.put("TripID", TripID);
 	                item.put("DriverID", DriverID);
@@ -143,11 +139,10 @@ public class Searchtrip extends Activity {
 				    R.layout.item,
 				    new String[] { "PosterID","TripID","DriverID" }, new int[] { R.id.PosterID, R.id.TripID, R.id.DriverID });
 	        listView.setAdapter(simpleAdapter); 
-	        }
 	        }catch(JSONException e1){
 				Toast.makeText(getBaseContext(), "No PosterID", Toast.LENGTH_LONG).show();
 	        }catch (ParseException e1){
 	            e1.printStackTrace();
-	        }	  
+	        }
 	 }
 	}

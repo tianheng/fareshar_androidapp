@@ -62,7 +62,7 @@ public class Searchtrip extends Activity {
 	  @Override
 	  protected String doInBackground(String... params) {
 	   HttpClient httpclient = new DefaultHttpClient();
-	   params[0]+="origin="+origin+"&destination="+destination;
+	   params[0]+="origin=champaign&destination=chicago";
 	   HttpGet httpget = new HttpGet(params[0]);
 	   try {
 	    HttpResponse response = httpclient.execute(httpget);
