@@ -10,13 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +27,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Searchtrip extends Activity {
@@ -42,7 +38,7 @@ public class Searchtrip extends Activity {
 	 private String destination;
 	 private String radius;
 	 private String PosterID_whole;
-	 private List<Map<String, String>> PosterIDList = new ArrayList<Map<String, String>>();
+	 private List<Map<String, String>> TripFoundList = new ArrayList<Map<String, String>>();
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
@@ -51,11 +47,7 @@ public class Searchtrip extends Activity {
 	  destination = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_DESTINATION);
 	  radius = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_RADIUS);
 	  setContentView(R.layout.activity_main);
-	  //listView = (ListView) findViewById(R.id.listView1);
 	  accessWebService();
-	  SimpleAdapter simpleAdapter = new SimpleAdapter(this, PosterIDList,
-			    android.R.layout.simple_list_item_1,
-			    new String[] { "PosterID" }, new int[] { android.R.id.text1 });
 	  //listView.setAdapter(simpleAdapter);
 	 }
 	 
@@ -119,9 +111,7 @@ public class Searchtrip extends Activity {
 	 }
 	 
 	 // build hash set for list view
-	 public void ListDrwaer() {
-	  
-	 
+	 public void ListDrwaer() {	  
 	  try {
 		  JSONArray jArray = new JSONArray(jsonResult);
 	        JSONObject json_data=null;
@@ -130,29 +120,29 @@ public class Searchtrip extends Activity {
 	        String DriverID;
 	        String fd_name;
 	        json_data = jArray.getJSONObject(0);
-	        PosterID_whole=json_data.getString("PosterID");
 	        for(int i=0;i<jArray.length();i++){
+	        		HashMap<String,String> item = new HashMap<String, String>();
 	                json_data = jArray.getJSONObject(i);
-	                PosterID+=json_data.getString("TripID")+"\n";
-	                TripID=json_data.getString("TripID");
-	                DriverID=json_data.getString("DriverID");
-	                PosterIDList.add(createPoster("PosterID", PosterID));
-	        }	         
-	  		PosterID_whole=PosterID;
-	  	  TextView textView=new TextView(this);
-		  textView.setTextSize(40);
-		  textView.setText(PosterID_whole);
-		  setContentView(textView);
+	                //PosterID+=json_data.getString("TripID");
+	                //TripID=json_data.getString("TripID");
+	                //DriverID=json_data.getString("DriverID");
+	                PosterID="fuck you";
+	                TripID="fuck you too";
+	                DriverID="yeah";
+	                item.put("PosterID", PosterID);
+	                item.put("TripID", TripID);
+	                item.put("DriverID", DriverID);
+	                TripFoundList.add(item);	                
+	        }
+	        listView = (ListView) findViewById(R.id.listView);
+	        SimpleAdapter simpleAdapter = new SimpleAdapter(this, TripFoundList,
+				    R.layout.item,
+				    new String[] { "PosterID","TripID","DriverID" }, new int[] { R.id.PosterID, R.id.TripID, R.id.DriverID });
+	        listView.setAdapter(simpleAdapter); 
 	        }catch(JSONException e1){
 				Toast.makeText(getBaseContext(), "No PosterID", Toast.LENGTH_LONG).show();
 	        }catch (ParseException e1){
 	            e1.printStackTrace();
 	        }
-	 }
-	 
-	 private HashMap<String, String> createPoster(String name, String number) {
-	  HashMap<String, String> employeeNameNo = new HashMap<String, String>();
-	  employeeNameNo.put(name, number);
-	  return employeeNameNo;
 	 }
 	}
