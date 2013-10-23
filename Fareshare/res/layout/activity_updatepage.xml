@@ -6,8 +6,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" 
+    tools:context=".Updatepage"
     android:orientation="vertical">
+    
     <EditText android:id="@+id/origin" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,20 +21,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/Radius" />
+	<EditText android:id="@+id/tripdatetime" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/TripDateTime" />
+	<EditText android:id="@+id/driverid" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/DriverID" />
+	<EditText android:id="@+id/seats" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/Seats" />
+	<EditText android:id="@+id/tripcost" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/TripCost" />
 
 	<Button
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/button_search" 
-	    android:onClick="searchtrip"/>
-	<Button 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/button_update"
-	    android:onClick="updatetrip"/>
-	<Button 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/button_delete"
-	    android:onClick="deletetrip"/>
+	    android:text="@string/Update" 
+	    android:onClick="updatepage"/>
 </LinearLayout>
