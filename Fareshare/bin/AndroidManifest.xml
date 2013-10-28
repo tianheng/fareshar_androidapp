@@ -22,14 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.fareshare.Searchtrip"
-            android:label="@string/title_activity_searchtrip"
-            android:parentActivityName="com.example.fareshare.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fareshare.MainActivity" />
-        </activity>
     </application>
 
 </manifest>

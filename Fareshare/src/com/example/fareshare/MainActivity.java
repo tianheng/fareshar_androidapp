@@ -8,19 +8,18 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
-	public final static String EXTRA_MESSAGE_DESTINATION = "com.example.myfirstapp.MESSAGE_destination";
-	public final static String EXTRA_MESSAGE_ORIGIN = "com.example.myfirstapp.MESSAGE_origin";
-	public final static String EXTRA_MESSAGE_RADIUS = "com.example.myfirstapp.MESSAGE_radius";
+	public final static String EXTRA_MESSAGE_PASSWORD = "com.example.myfirstapp.MESSAGE_password";
+	public final static String EXTRA_MESSAGE_USERID = "com.example.myfirstapp.MESSAGE_userid";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		//getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
@@ -29,19 +28,16 @@ public class MainActivity extends Activity {
 	    Intent intent = new Intent(this, Searchtrip.class);
 	    
 	    //get destination, origin, and radius from text block
-	    EditText destination = (EditText) findViewById(R.id.destination);
-	    EditText origin = (EditText) findViewById(R.id.origin);
-	    EditText radius = (EditText) findViewById(R.id.radius);
+	    EditText userid = (EditText) findViewById(R.id.userid);
+	    EditText password = (EditText) findViewById(R.id.password);
 	    
 	    //transform to string
-	    String message_destination = destination.getText().toString();
-	    String message_origin = origin.getText().toString();
-	    String message_radius = radius.getText().toString();
+	    String message_userid = userid.getText().toString();
+	    String message_password = password.getText().toString();
 	    
 	    //add data to intent
-	    intent.putExtra(EXTRA_MESSAGE_DESTINATION, message_destination);
-	    intent.putExtra(EXTRA_MESSAGE_ORIGIN, message_origin);
-	    intent.putExtra(EXTRA_MESSAGE_RADIUS, message_radius);
+	    intent.putExtra(EXTRA_MESSAGE_USERID, message_userid);
+	    intent.putExtra(EXTRA_MESSAGE_PASSWORD, message_password);
 	    startActivity(intent);
 	}
 

@@ -8,32 +8,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" 
     android:orientation="vertical">
-    <EditText android:id="@+id/origin" 
+    <EditText android:id="@+id/userid" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/Origin" />
-	<EditText android:id="@+id/destination" 
+        android:hint="@string/UserId" />
+	<EditText android:id="@+id/password" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/Destination" />
-	<EditText android:id="@+id/radius" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/Radius" />
-
+        android:inputType="textPassword"
+        android:hint="@string/Password" />
 	<Button
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/button_search" 
-	    android:onClick="searchtrip"/>
+	    android:text="@string/button_Login" 
+	    android:onClick="Login"/>
 	<Button 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/button_update"
-	    android:onClick="updatetrip"/>
+	    android:text="@string/button_Login_with_facebook"
+	    android:onClick="FacebookLogin"/>
 	<Button 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/button_delete"
-	    android:onClick="deletetrip"/>
+	    android:text="@string/button_Registration"
+	    android:onClick="Registration"/>
 </LinearLayout>
